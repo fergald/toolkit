@@ -1,0 +1,3 @@
+for f in $(run-parts --list ~/toolkit/bash/unordered.d); do
+  . $f
+done
