@@ -1,12 +1,14 @@
-#! /bin/bash -e
+#! /bin/bash -xe
 
 if [ $# -gt 0 ]; then
-		DESTDIR=$1
+		home=$1
 		shift
 else
-		DESTDIR="$HOME/toolkit"
+		home="$HOME"
 fi
-echo Installing to $DESTDIR. Hit enter to delete.
+tooldir=$home/toolkit
+echo Installing to $home. Hit enter to delete $tooldir
 read f
-rm -rf "$DESTDIR"
-rsync -avr $(cat MANIFEST) $DESTDIR/
+rm -rf "$tooldir"
+rsync -avr $(cat MANIFEST) $tooldir/
+./make_links.py $home
