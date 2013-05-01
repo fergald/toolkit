@@ -1,12 +1,12 @@
-#! /bin/bash
+#! /bin/bash -e
 
 if [ $# -gt 0 ]; then
-		DEST=$1
+		DESTDIR=$1
 		shift
 else
-		DEST="$HOME/toolkit"
+		DESTDIR="$HOME/toolkit"
 fi
-echo Installing to $DEST. Hit enter to delete.
+echo Installing to $DESTDIR. Hit enter to delete.
 read f
-rm -rf "$DEST"
-rsync -avr $(cat MANIFEST) $DEST/
+rm -rf "$DESTDIR"
+rsync -avr $(cat MANIFEST) $DESTDIR/
