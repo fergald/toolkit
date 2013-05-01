@@ -47,4 +47,5 @@
       (cons '("\\.\\(xml\\|xsl\\|rng\\|xhtml\\)\\'" . nxml-mode)
             auto-mode-alist))
 
-; (require 'go-mode-load)
+(add-to-list 'load-path "/home/fergal/.emacs.d" t)
+;(require 'go-mode-load)
