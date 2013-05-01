@@ -3,6 +3,10 @@
 import os
 import sys
 
+class Error(Exception):
+  """Base class for exceptions."""
+
+
 def ReadLinks(filename):
   for line in file(filename):
     line = line.strip()
@@ -26,7 +30,7 @@ def MakeLinks(homedir, tooldir, links):
       if os.path.islink(full_dest):
         os.remove(full_dest)
       else:
-        raise "%s exists but is not a link" % full_dest
+        raise Error("%s exists but is not a link" % full_dest)
     full_src = os.path.join(tooldir, src)
     print "link %r %r" % (full_src, full_dest)
     os.symlink(full_src, full_dest)
@@ -34,7 +38,7 @@ def MakeLinks(homedir, tooldir, links):
 
 def main(args):
   if len(args) < 2:
-    raise "Must supply a home dir."
+    raise Error("Must supply a home dir.")
   homedir = args[1]
   tooldir = os.path.abspath(os.path.join(homedir, "toolkit"))
   MakeLinks(homedir, tooldir, GetDots(os.path.join(tooldir, "dots")))
