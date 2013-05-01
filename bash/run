@@ -1,3 +1,8 @@
-for f in $(run-parts --list ~/toolkit/bash/unordered.d); do
+DIR=~/toolkit/bash/
+for f in $(run-parts --list $DIR/ordered.d); do
+  . $f
+done
+
+for f in $(run-parts --list $DIR/unordered.d); do
   . $f
 done
