@@ -12,3 +12,4 @@ read f
 rm -rf "$tooldir"
 rsync -avr $(cat MANIFEST) $tooldir/
 ./make_links.py $home
+git log -n 1 --format="format:%H%n" > $tooldir/version
