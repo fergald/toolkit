@@ -1,0 +1,9 @@
+alias "cd.."="cd .."
+alias ftp='ncftp'
+alias redos="perl -pi -e 's/\n/\r\n/g'"
+alias redosall="find -type f -print0| xargs -0 perl -pi -e 's/\n/\r\n/g'"
+alias rmbak='rm *~'
+alias rmbakall='find -type f -name "*~" -print0|xargs -0 rm -f'
+alias sub="perl -pi.bak -e"
+alias undos="perl -pi -e 's/\r//g'"
+alias undosall="find -type f -print0| xargs perl -pi -e 's/\r//g'"
