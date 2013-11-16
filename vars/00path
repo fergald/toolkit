@@ -1,2 +1,2 @@
-export PATH=$HOME/toolkit/bin:$HOME/link-bin:$HOME/my/bin:$HOME/src/go-bin:$PATH
+export PATH=$HOME/toolkit/bin:$HOME/link-bin:$HOME/my/bin:$PATH
 export PATH=$PATH:$HOME/android-sdks/platform-tools:$HOME/android-sdks/tools
