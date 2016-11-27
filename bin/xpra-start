@@ -1,0 +1,3 @@
+#! /bin/sh
+
+xpra start :100 --start-child gnome-terminal
