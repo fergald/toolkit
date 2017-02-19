@@ -1,0 +1,6 @@
+#! /bin/bash
+
+unset DISPLAY
+/usr/bin/emacs "$@"
+#/usr/bin/emacs -nw "$@"
+
