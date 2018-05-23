@@ -25,7 +25,7 @@
 ;(setq-default indent-tabs-mode nil)
 (setq-default tab-width 2)
 (setq py-indent-offset 4)
-(setq python-indent 2)
+(setq python-indent-offset 2)
 (setq js-indent-level 2)
 
 (let ((path "~/.emacs-lisp/nxml-mode-20041004/rng-auto.el"))
@@ -46,3 +46,6 @@
             auto-mode-alist))
 
 ; (require 'go-mode-load)
+
+; FOAD tabs
+(setq-default indent-tabs-mode nil)
