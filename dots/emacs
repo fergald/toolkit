@@ -1,5 +1,5 @@
 (add-to-list 'load-path "~/.emacs-lisp/" t)
-(add-to-list 'load-path "~/.emacs.d/" t)
+(add-to-list 'load-path "~/.emacs.d/elisp" t)
 (load "fergal-auto-save")
 (load "fergal-misc")
 (load "fergal-page")
