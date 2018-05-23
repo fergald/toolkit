@@ -49,3 +49,5 @@
 
 ; FOAD tabs
 (setq-default indent-tabs-mode nil)
+
+(defun ipdb () (interactive) (insert "import pdb;pdb.set_trace()"))
