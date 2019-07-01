@@ -26,14 +26,15 @@ def GetDots(dirname):
 def MakeLinks(homedir, tooldir, links):
   for src, dest in links:
     full_dest = os.path.join(homedir, dest)
+    full_src = os.path.join(tooldir, src)
     if os.path.lexists(full_dest):
-      if os.path.islink(full_dest):
-        os.remove(full_dest)
+      if os.path.realpath(full_dest) == os.path.realpath(full_src):
+        print "already link %r %r" % (full_src, full_dest)
       else:
         raise Error("%s exists but is not a link" % full_dest)
-    full_src = os.path.join(tooldir, src)
-    print "link %r %r" % (full_src, full_dest)
-    os.symlink(full_src, full_dest)
+    else:
+      print "link %r %r" % (full_src, full_dest)
+      os.symlink(full_src, full_dest)
 
 
 def main(args):
