@@ -1,0 +1,4 @@
+export GOMA_DIR=${HOME}/goma
+export CHROMIUM=${HOME}/chromium
+export CHROMIUM_SRC=${CHROMIUM}/src
+export PATH=$PATH:$CHROMIUM/depot_tools
