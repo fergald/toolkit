@@ -51,3 +51,5 @@
 (setq-default indent-tabs-mode nil)
 
 (defun ipdb () (interactive) (insert "import pdb;pdb.set_trace()"))
+
+(add-hook 'before-save-hook 'delete-trailing-whitespace)
