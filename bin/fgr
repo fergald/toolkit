@@ -1,0 +1,6 @@
+#! /bin/bash
+
+where=$1
+shift
+# $where is not quoted here to allow multiple arguments.
+find $where -type f -print0 | xargs -0 egrep "$@"
