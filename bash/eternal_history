@@ -1,3 +1,12 @@
 # Record all commands in an eternal history file
-PROMPT_COMMAND="${PROMPT_COMMAND:+$PROMPT_COMMAND ; }"'echo $$ $USER \
-               "$(history 1)" >> ~/.bash_eternal_history'
+
+eternal_record_command() {
+  echo "$$ $USER $1" >> ~/.bash_eternal_history
+}
+
+if [[ "$__bp_imported" ]]; then
+    preexec_functions+=(eternal_record_command)
+else
+    PROMPT_COMMAND="${PROMPT_COMMAND:+$PROMPT_COMMAND ; }"\
+                  'eternal_record_command "$(history 1)"'
+fi
