@@ -1,0 +1,4 @@
+#! /bin/bash
+
+tac ~/.bash_eternal_history | grep "$@"
+
