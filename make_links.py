@@ -23,6 +23,21 @@ def GetDots(dirname):
     yield os.path.join(dirname, filename), "." + filename
 
 
+def FindLinks(dirname):
+  links = []
+  def HandleDir(arg, sub_dirname, fnames):
+    for fname in fnames:
+      src = os.path.join(sub_dirname, fname)
+      if os.path.isdir(src):
+        return
+      links.append(
+        (src,
+         os.path.join(os.path.relpath(sub_dirname, dirname), fname)))
+
+  os.path.walk(dirname, HandleDir, None)
+  return links
+
+
 def MakeLinks(homedir, tooldir, links):
   for src, dest in links:
     full_dest = os.path.join(homedir, dest)
@@ -45,8 +60,10 @@ def main(args):
     raise Error("Must supply a home dir.")
   homedir = args[1]
   tooldir = os.path.abspath(os.path.join(homedir, "toolkit"))
+
   MakeLinks(homedir, tooldir, GetDots(os.path.join(tooldir, "dots")))
   MakeLinks(homedir, tooldir, ReadLinks("LINKS"))
+  MakeLinks(homedir, tooldir, FindLinks(os.path.join(tooldir, "links")))
 
 
 if __name__ == "__main__":

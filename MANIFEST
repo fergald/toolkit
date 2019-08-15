@@ -2,5 +2,6 @@ bash
 bash.sh
 bin
 dots
+links
 vars
 vars.sh
