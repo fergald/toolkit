@@ -27,6 +27,9 @@ def MakeLinks(homedir, tooldir, links):
   for src, dest in links:
     full_dest = os.path.join(homedir, dest)
     full_src = os.path.join(tooldir, src)
+    dest_dir =  os.path.dirname(full_dest)
+    if not os.path.exists(dest_dir):
+      os.makedirs(dest_dir)
     if os.path.lexists(full_dest):
       if os.path.realpath(full_dest) == os.path.realpath(full_src):
         print "already link %r %r" % (full_src, full_dest)
