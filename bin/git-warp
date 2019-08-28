@@ -1,0 +1,14 @@
+# Warp the current branch to this state. Will look like you manually
+# changed all the files to have
+
+sha="$1"
+shift
+
+echo Enter a commit message
+new_sha=$(git commit-tree -p HEAD "$sha"^{tree})
+
+if [ -z "$new_sha" ]; then
+  exit 1;
+else
+  git reset --hard "$new_sha"
+fi
