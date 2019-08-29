@@ -1,0 +1,19 @@
+#! /bin/bash
+
+while true
+do
+  if [ $# -gt 0 ]; then
+    sha=$1
+    shift
+  else 
+    echo enter a sha
+    read sha
+  fi
+  git show $sha
+  echo y to cherry-pick
+  read resp
+  if [ "$resp" = "y" ]
+  then
+    git cherry-pick $sha
+  fi
+done
