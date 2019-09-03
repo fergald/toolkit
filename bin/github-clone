@@ -1,0 +1,17 @@
+#! /bin/sh -e
+
+url=$1
+shift
+
+if [[ -z "$url" ]]; then
+    echo >&2 No URL supplied
+    exit 1
+fi
+
+user="$(echo $url | cut -d / -f 4)"
+repo="$(echo $url | cut -d / -f 5)"
+
+user_dir=~/github/"$user"
+mkdir -p "$user_dir"
+cd "$user_dir"
+git clone "git@github.com:$user/$repo.git"
