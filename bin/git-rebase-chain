@@ -1,0 +1,23 @@
+#! /bin/sh -e
+
+# Recursively rebase all upstream branches
+
+if [[ $# -gt 0 ]]; then
+    branch="$1"
+    shift
+else
+    branch="$(git branch --show-current)"
+fi
+
+function rebase() {
+    declare branch=$1
+    declare upstream=$(git branch --list "$branch" --format='%(upstream)' |
+                   grep ^refs/heads/ |
+                   cut -d / -f 3
+            )
+    if [[ -n "$upstream" ]]; then
+        rebase "$upstream"
+        git rebase "$upstream" "$branch"
+    fi
+}
+rebase "$branch"
