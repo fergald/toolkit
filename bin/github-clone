@@ -1,4 +1,4 @@
-#! /bin/sh -e
+#! /bin/sh -ex
 
 url=$1
 shift
@@ -8,8 +8,10 @@ if [[ -z "$url" ]]; then
     exit 1
 fi
 
-user="$(echo $url | cut -d / -f 4)"
-repo="$(echo $url | cut -d / -f 5)"
+url=$(echo $url | perl -lne 'print "$2/$3" if (m#(^|/)([^/]+)/([^/]+)/?$#)')
+user="$(echo $url | cut -d / -f 1)"
+repo="$(echo $url | cut -d / -f 2)"
+
 
 user_dir=~/github/"$user"
 mkdir -p "$user_dir"
