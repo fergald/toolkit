@@ -1,0 +1,14 @@
+#! /bin/bash -ex
+
+# fninja-run
+
+out=$1
+shift
+target=$1
+shift
+
+dir="$(dirname $0)"
+
+
+"$dir"/fninja "$out" "$target"
+out/"$out"/"$target" "$@"

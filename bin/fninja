@@ -1,0 +1,9 @@
+#! /bin/bash
+
+src=$($(dirname $(readlink -f $0))/fninja-src $PWD)
+build=$1
+shift
+
+cd $src
+set -x
+autoninja -C out/$build "$@"

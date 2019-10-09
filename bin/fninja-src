@@ -1,0 +1,12 @@
+#!/bin/bash
+
+dir=$(readlink -f $1)
+while [[ -n "$dir" ]]; do
+  if [[ $(basename "$dir") = src ]]; then
+    echo $dir
+    exit
+  else
+    dir=$(dirname "$dir")
+  fi
+done
+exit 1
