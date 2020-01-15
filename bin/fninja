@@ -1,4 +1,4 @@
-#! /bin/bash
+#! /bin/bash -e
 
 src=$($(dirname $(readlink -f $0))/fninja-src $PWD)
 build=$1
