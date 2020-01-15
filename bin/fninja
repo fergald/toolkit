@@ -4,6 +4,10 @@ src=$($(dirname $(readlink -f $0))/fninja-src $PWD)
 build=$1
 shift
 
+out="out/$build"
 cd $src
+if [ ! -f "$out/build.ninja" ]; then
+    gn gen "$out"
+fi
 set -x
-autoninja -C out/$build "$@"
+autoninja -C "$out" "$@"
