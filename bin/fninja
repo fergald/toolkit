@@ -6,6 +6,10 @@ shift
 
 out="out/$build"
 cd $src
+if [ ! -d "$out" ]; then
+    echo >&2 "$out does not exist"
+    exit 1
+fi
 if [ ! -f "$out/build.ninja" ]; then
     gn gen "$out"
 fi
