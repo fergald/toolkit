@@ -1,0 +1,5 @@
+#! /bin/bash -e
+
+for f in $(ls -d /sys/class/scsi_host/host*); do
+  echo "- - -" > $f/scan
+done
