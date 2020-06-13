@@ -1,0 +1,10 @@
+;; Get a bunch of default template for languages
+;;(require 'autoinsert)
+(setq auto-insert-directory "~/emacs-templates/")
+(setq auto-insert-query nil)
+(defun template-list (insert-directory)
+(let (lst)
+  (dolist (elt (directory-files insert-directory nil "[^\\.]" nil) lst)
+  (setq lst (append lst `((,(concat "\\." elt "$") . ,elt)))))))
+(setq auto-insert-alist (template-list auto-insert-directory))
+(auto-insert-mode)

@@ -1,0 +1,10 @@
+;; Get paragraph fill working correctly for languages
+(defun line-length-hook-100 ()
+  (setq fill-column 100))
+(add-hook 'java-mode-hook 'line-length-hook-100)
+(defun line-length-hook-80 ()
+  (setq fill-column 80))
+(add-hook 'c++-mode-hook 'line-length-hook-80)
+(add-hook 'python-mode-hook 'line-length-hook-80)
+(add-hook 'protobuf-mode-hook 'line-length-hook-80)
+(add-hook 'shell-script-mode-hook 'line-length-hook-80)
