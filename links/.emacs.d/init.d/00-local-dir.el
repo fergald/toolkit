@@ -1,7 +1,2 @@
 (require 'load-directory)
-(dolist (dir (list "~/.emacs.d/local.d"))
-  (if (file-directory-p dir)
-      (load-directory dir)
-      (message "%s does not exist" dir)
-    )
-  )
+(load-directory "~/.emacs.d/local.d")
