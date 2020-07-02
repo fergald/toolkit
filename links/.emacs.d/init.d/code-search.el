@@ -167,6 +167,27 @@
   (find-file (file-from-local-path path))
   )
 
+
+(defun file-from-anything (path)
+  (let (res)
+    (dolist (f (list `file-from-url `file-from-git-path `file-from-local-path) res)
+      (if res
+          nil
+        (setq res (funcall f path)))
+      )
+    )
+  )
+;; (file-from-anything "a/content/renderer/render_frame_impl.cc")
+;; (file-from-anything "https://cs.chromium.org/chromium/src/tools/emacs/adsf?q=emacs&sq=package:chromium&dr")
+;; (file-from-anything "../../content/renderer/render_frame_impl.cc")
+
+
+(defun open-file-from-anything (path)
+  (interactive "sEnter local path: ")
+  (find-file (file-from-anything path))
+  )
+
+
 ; (file-from-git-path "a/foo/bar/")
 ; (extract-path-from-git-path "a/foo/bar/")
 ; (extract-path-from-git-path "b/foo/bar")
