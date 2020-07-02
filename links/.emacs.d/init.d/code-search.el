@@ -71,12 +71,13 @@
     )
   )
 
-;; (file-from-url "https://cs.chromium.org/chromium/src/tools/emacs/adsf?q=emacs&sq=package:chromium&dr")
-;; (file-from-url "https://source.chromium.org/chromium/chromium/src/+/master:content/browser/frame_host/embedding_token_browsertest.cc?q=EmbeddingTokenBrowserTest.EmbeddingTokensDoNotSwapOnSameSiteNavigations&ss=chromium&originalUrl=https:%2F%2Fcs.chromium.org%2Fsearch%2F")
-;; -> "/home/fergal/chromium/src/tools/emacs/adsf"
 (defun file-from-url (url)
   (file-from-something 'extract-path-from-url url)
   )
+;; (file-from-url "https://cs.chromium.org/chromium/src/tools/emacs/adsf?q=emacs&sq=package:chromium&dr")
+;; (file-from-url "https://source.chromium.org/chromium/chromium/src/+/master:content/browser/frame_host/embedding_token_browsertest.cc?q=EmbeddingTokenBrowserTest.EmbeddingTokensDoNotSwapOnSameSiteNavigations&ss=chromium&originalUrl=https:%2F%2Fcs.chromium.org%2Fsearch%2F")
+;; -> "/home/fergal/chromium/src/tools/emacs/adsf"
+;; (file-from-url "/cs.asdf.org/chromium/src/tools/emacs/adsf?q=emacs&sq=package:chromium&dr") -> nil
 
 ;; (extract-path-from-git-path "a/content/renderer/render_frame_impl.cc")
 (defun extract-path-from-git-path (path)
