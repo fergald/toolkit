@@ -38,7 +38,7 @@
   (let ((root (chromium-root buffer-file-name))
         (filename (funcall path-extractor something))
         )
-    (if root
+    (if (and root filename)
         (concat (file-name-as-directory root) filename)
       (progn (message "something: %s" something)
              (message "filename: %s" filename)
