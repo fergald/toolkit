@@ -8,7 +8,7 @@
                (message "found it, doing nothing")
              (insert (concat "#include \""
                              (expand-file-name
-                              "~fergal/debug/log.h" "\"\n"))
+                              "~fergal/debug/log.h") "\"\n")
                      )
              )
            )))
