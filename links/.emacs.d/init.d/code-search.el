@@ -79,16 +79,33 @@
 ;; -> "/home/fergal/chromium/src/tools/emacs/adsf"
 ;; (file-from-url "/cs.asdf.org/chromium/src/tools/emacs/adsf?q=emacs&sq=package:chromium&dr") -> nil
 
-;; (extract-path-from-git-path "a/content/renderer/render_frame_impl.cc")
-(defun extract-path-from-git-path (path)
+(defun strip-git-a-b (path)
   (if (or (string= path "a") (string= path "b"))
-      "chromium/src"
-    (concat (file-name-as-directory
-             (extract-path-from-git-path
-              (directory-file-name (file-name-directory path))))
-            (file-name-nondirectory path))
+      ""
+    (let ((dir (file-name-directory path)) (file (file-name-nondirectory path)))
+      (if dir
+          (let ((subres (strip-git-a-b
+                         (directory-file-name (file-name-directory path)))))
+            (if subres
+                (concat
+                 (file-name-as-directory subres)
+                 file)
+              )
+            )
+        )
+      )
     )
   )
+;; (strip-git-a-b "a/content/renderer/render_frame_impl.cc")
+;; (strip-git-a-b "content/renderer/render_frame_impl.cc")
+
+(defun extract-path-from-git-path (path)
+  (let ((res (strip-git-a-b path)))
+    (if res
+        (concat "chromium/src/" res)
+      )))
+;; (extract-path-from-git-path "a/content/renderer/render_frame_impl.cc")
+;; (extract-path-from-git-path "content/renderer/render_frame_impl.cc")
 
 ;; (file-from-git-path "a/content/renderer/render_frame_impl.cc")
 (defun file-from-git-path (path)
