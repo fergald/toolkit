@@ -54,10 +54,6 @@
                             path)
   )
 
-; (extract-path-from-url "https://cs.chromium.org/chromium/src/tools/emacs/?q=emacs&sq=package:chromium&dr")
-; (extract-path-from-url "https://cs.chromiu.org/chromium/src/tools/emacs/?q=emacs&sq=package:chromium&dr")
-; (extract-path-from-url "https://source.chromium.org/chromium/chromium/src/+/master:content/browser/frame_host/embedding_token_browsertest.cc?q=EmbeddingTokenBrowserTest.EmbeddingTokensDoNotSwapOnSameSiteNavigations&ss=chromium&originalUrl=https:%2F%2Fcs.chromium.org%2Fsearch%2F")
-; -> "chromium/src/..."
 (defun extract-path-from-url (url)
   (let ((parsed (url-generic-parse-url url)))
     (let ((host (url-host parsed)))
@@ -70,6 +66,10 @@
       )
     )
   )
+; (extract-path-from-url "https://cs.chromium.org/chromium/src/tools/emacs/?q=emacs&sq=package:chromium&dr")
+; (extract-path-from-url "https://cs.chromiu.org/chromium/src/tools/emacs/?q=emacs&sq=package:chromium&dr")
+; (extract-path-from-url "https://source.chromium.org/chromium/chromium/src/+/master:content/browser/frame_host/embedding_token_browsertest.cc?q=EmbeddingTokenBrowserTest.EmbeddingTokensDoNotSwapOnSameSiteNavigations&ss=chromium&originalUrl=https:%2F%2Fcs.chromium.org%2Fsearch%2F")
+; -> "chromium/src/..."
 
 (defun file-from-url (url)
   (file-from-something 'extract-path-from-url url)
