@@ -39,7 +39,7 @@
         (filename (funcall path-extractor something))
         )
     (if (and root filename)
-        (concat (file-name-as-directory root) filename)
+        (concat (file-name-as-directory root) "chromium/src/" filename)
       (progn (message "something: %s" something)
              (message "filename: %s" filename)
              (message "root: %s" root)
@@ -49,12 +49,16 @@
   )
 
 (defun remove-branch (path)
-  (replace-regexp-in-string (regexp-quote "chromium/chromium/src/+/master:")
-                            "chromium/src/"
-                            path)
+  (replace-regexp-in-string
+   (regexp-quote "chromium/src")
+   ""
+   (replace-regexp-in-string (regexp-quote "chromium/src/+/master:")
+                             "src/"
+                             path)
+   )
   )
-; (remove-branch "chromium/chromium/src/+/master:content/browser") -> "chromium/src/content/browser"
-; (remove-branch "chromium/src/tools/emacs/") -> "chromium/src/tools/emacs/"
+; (remove-branch "chromium/chromium/src/+/master:content/browser") -> "/content/browser"
+; (remove-branch "chromium/src/tools/emacs/") -> "/tools/emacs/"
 
 (defun extract-path-from-url (url)
   (let ((parsed (url-generic-parse-url url)))
@@ -102,10 +106,8 @@
 ;; (strip-git-a-b "content/renderer/render_frame_impl.cc")
 
 (defun extract-path-from-git-path (path)
-  (let ((res (strip-git-a-b path)))
-    (if res
-        (concat "chromium/src/" res)
-      )))
+  (strip-git-a-b path)
+  )
 ;; (extract-path-from-git-path "a/content/renderer/render_frame_impl.cc")
 ;; (extract-path-from-git-path "content/renderer/render_frame_impl.cc")
 
@@ -158,8 +160,8 @@
 ; (line-number-from-local-path "foo")
 
 (defun extract-path-from-local-path (path)
-  (cond ((or (not path) (all-parents-p path )) "chromium/src")
-        ((not (file-name-directory path)) (concat "chromium/src/" path))
+  (cond ((or (not path) (all-parents-p path )) "")
+        ((not (file-name-directory path)) (concat ""))
         (t
          (concat (file-name-as-directory
                   (extract-path-from-local-path
