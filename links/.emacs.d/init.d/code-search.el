@@ -157,19 +157,42 @@
 ;; (file-from-git-path "content/renderer/render_frame_impl.cc")
 ;; (file-from-git-path "../../content/renderer/render_frame_impl.cc")
 
+(defun get-file-and-line (i)
+  (if (listp i)
+      i
+    (cons i 1)
+    )
+  )
+; (get-file-and-line (cons "foo" 10)
+; (get-file-and-line "foo")
+
+; i = (cons path line)
+; i = path
+(defun find-file-and-line (i)
+  (let* ((fl (get-file-and-line i)) (path (car fl)) (line (cdr fl)))
+    (progn
+      (find-file path)
+      (goto-char (point-min))
+      (forward-line (- line 1))
+      )
+    )
+  )
+; (find-file-and-line (cons "/etc/passwd" 10))
+; (find-file-and-line "/etc/passwd")
+
 (defun open-file-from-codesearch (url)
   (interactive "sEnter codesearch URL: ")
-  (find-file (file-from-url url))
+  (find-file-and-line (file-from-url url))
   )
 
 (defun open-file-from-git-path (path)
   (interactive "sEnter git path: ")
-  (find-file (file-from-git-path path))
+  (find-file-and-line (file-from-git-path path))
   )
 
 (defun open-file-from-local-path (path)
   (interactive "sEnter local path: ")
-  (find-file (file-from-local-path path))
+  (find-file-and-line (file-from-local-path path))
   )
 
 
@@ -189,7 +212,7 @@
 
 (defun open-file-from-anything (path)
   (interactive "sEnter local path: ")
-  (find-file (file-from-anything path))
+  (find-file-and-line (file-from-anything path))
   )
 
 
