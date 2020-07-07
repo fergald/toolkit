@@ -109,10 +109,10 @@
 ;; (extract-path-from-git-path "a/content/renderer/render_frame_impl.cc")
 ;; (extract-path-from-git-path "content/renderer/render_frame_impl.cc")
 
-;; (file-from-git-path "a/content/renderer/render_frame_impl.cc")
 (defun file-from-git-path (path)
   (file-from-something 'extract-path-from-git-path path)
   )
+;; (file-from-git-path "a/content/renderer/render_frame_impl.cc")
 
 (defun remove-if-slash (path)
   (if (directory-name-p path) (directory-file-name path) path)
@@ -174,8 +174,8 @@
 (defun file-from-local-path (path)
   (file-from-something 'extract-path-from-local-path path)
   )
-;; (file-from-git-path "content/renderer/render_frame_impl.cc")
-;; (file-from-git-path "../../content/renderer/render_frame_impl.cc")
+;; (file-from-local-path "content/renderer/render_frame_impl.cc")
+;; (file-from-local-path "../../content/renderer/render_frame_impl.cc")
 
 (defun get-file-and-line (i)
   (if (listp i)
