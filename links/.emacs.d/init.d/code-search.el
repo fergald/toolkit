@@ -125,14 +125,18 @@
 (defun all-parents-p (path)
   (if (eq path nil) t
     (let ((newpath (remove-if-slash path)))
-      (if (string= (file-name-nondirectory newpath) "..")
-          (all-parents-p (file-name-directory newpath))
-        nil
-        ))))
+      (let ((dir (file-name-nondirectory newpath)))
+        (if (or (string= dir "..") (string= dir "."))
+            (all-parents-p (file-name-directory newpath))
+          nil
+          )))))
 ;; (all-parents-p "..")
 ;; (all-parents-p "../")
 ;; (all-parents-p "../../")
+;; (all-parents-p "./../../")
 ;; (all-parents-p "../../foo")
+;; (all-parents-p "./../../foo")
+
 (defun extract-path-from-local-path (path)
   (cond ((or (not path) (all-parents-p path )) "chromium/src")
         ((not (file-name-directory path)) (concat "chromium/src/" path))
@@ -145,6 +149,7 @@
         ))
 ;; (extract-path-from-local-path "content/renderer/render_frame_impl.cc")
 ;; (extract-path-from-local-path "../../content/renderer/render_frame_impl.cc")
+;; (extract-path-from-local-path "./../../content/renderer/render_frame_impl.cc")
 
 (defun file-from-local-path (path)
   (file-from-something 'extract-path-from-local-path path)
