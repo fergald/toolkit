@@ -53,6 +53,8 @@
                             "chromium/src/"
                             path)
   )
+; (remove-branch "chromium/chromium/src/+/master:content/browser") -> "chromium/src/content/browser"
+; (remove-branch "chromium/src/tools/emacs/") -> "chromium/src/tools/emacs/"
 
 (defun extract-path-from-url (url)
   (let ((parsed (url-generic-parse-url url)))
