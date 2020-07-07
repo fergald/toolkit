@@ -137,6 +137,24 @@
 ;; (all-parents-p "../../foo")
 ;; (all-parents-p "./../../foo")
 
+(let ((s "foo:100:3"))
+  )
+
+(defun line-number-from-local-path (path)
+  (let ((final (file-name-nondirectory path)))
+    (if
+        (string-match "^\\(.*?\\):\\([0-9]+\\)\\(:[0-9]+\\)?$" final)
+        (list (match-string 1 final)
+              (string-to-number (match-string 2 final))
+              )
+      final
+      )
+    )
+  )
+; (line-number-from-local-path "foo:100")
+; (line-number-from-local-path "foo:100:3")
+; (line-number-from-local-path "foo")
+
 (defun extract-path-from-local-path (path)
   (cond ((or (not path) (all-parents-p path )) "chromium/src")
         ((not (file-name-directory path)) (concat "chromium/src/" path))
