@@ -1,12 +1,17 @@
-#! /usr/bin/perl -lp
+#! /usr/bin/perl
+
+# first arg is an optional factor to multiply everything by, e.g. if the inputs
+# are already in 1024 blocks.
 
 use strict;
 use warnings;
 
+my $FACTOR = shift || 1;
+
 my @SUFFIXES = split("", "kMGTEPZY");
 
 sub human {
-  my $num = shift;
+  my $num = shift() * $FACTOR;
   my $s = -1;
   while (($num >= 1000) and ($s < $#SUFFIXES)) {
     $num = int($num) / 1000;
@@ -18,5 +23,9 @@ sub human {
   return $num;
 }
 
-# Apply to any stand-alone numbers.
-s/(((?<=\s)|^)\d+(?=\s|$))/human($1)/ge;
+while (<>) {
+  # Apply to any stand-alone numbers.
+  s/(((?<=\s)|^)\d+(?=\s|$))/human($1)/ge;
+} continue {
+  print or die "-p destination: $!\n";
+}
