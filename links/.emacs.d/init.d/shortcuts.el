@@ -1,21 +1,29 @@
 (defun ipdb () (interactive) (insert "import pdb;pdb.set_trace()\n"))
 (defun dns () (interactive) (insert "DO NOT SUBMIT"))
-(defun fdbg () (interactive)
+(defun fheader (name)
        (save-mark-and-excursion
          (progn
            (goto-char (point-min))
-           (if (search-forward "fergal/debug/log.h" nil t)
+           (if (search-forward (concat "fergal/debug/" name) nil t)
                (message "found it, doing nothing")
              (insert (concat "#include \""
                              (expand-file-name
-                              "~fergal/debug/log.h") "\"\n")
+                              (concat "~fergal/debug/" name)) "\"\n")
                      )
              )
            )))
-(defun fle () (interactive)
+
+(defun fdbg () (interactive)
+       (fheader "log.h")
+       )
+
+(defun finsert (s h)
        (progn
-         (insert "FLOG_EXPR();\n")
+         (insert s)
          (backward-char 3)
-         (fdbg)
+         (fheader h)
          )
+       )
+(defun fle () (interactive)
+       (finsert "FLOG_EXPR();\n" "flog.h")
        )
