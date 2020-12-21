@@ -1,5 +1,8 @@
 #! /usr/bin/perl -lp
 
+use strict;
+use warnings;
+
 my @SUFFIXES = split("", "kMGTEPZY");
 
 sub human {
@@ -10,7 +13,7 @@ sub human {
     $s++;
   }
   my $suffix = $s == -1 ? "" : $SUFFIXES[$s];
-  my $num = sprintf("%.1f", $num).$suffix;
+  $num = sprintf("%.1f", $num).$suffix;
   $num =~ s/\.?0+$//;
   return $num;
 }
