@@ -4,12 +4,9 @@
        (save-mark-and-excursion
          (progn
            (goto-char (point-min))
-           (if (search-forward (concat "fergal/debug/" name) nil t)
+           (if (search-forward (concat "\"debug/" name) nil t)
                (message "found it, doing nothing")
-             (insert (concat "#include \""
-                             (expand-file-name
-                              (concat "~fergal/debug/" name)) "\"\n")
-                     )
+             (insert (concat "#include \"debug/" name) "\"\n")
              )
            )))
 
