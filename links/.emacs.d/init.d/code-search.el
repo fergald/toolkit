@@ -84,6 +84,7 @@
 ;; (file-from-url "https://source.chromium.org/chromium/chromium/src/+/master:content/browser/frame_host/embedding_token_browsertest.cc?q=EmbeddingTokenBrowserTest.EmbeddingTokensDoNotSwapOnSameSiteNavigations&ss=chromium&originalUrl=https:%2F%2Fcs.chromium.org%2Fsearch%2F")
 ;; -> "/home/fergal/chromium/src/tools/emacs/adsf"
 ;; (file-from-url "/cs.asdf.org/chromium/src/tools/emacs/adsf?q=emacs&sq=package:chromium&dr") -> nil
+;; (file-from-url "content/browser/renderer_host/back_forward_cache_can_store_document_result.h") -> nil
 
 (defun strip-git-a-b (path)
   (if (or (string= path "a") (string= path "b"))
@@ -115,6 +116,7 @@
   (file-from-something 'extract-path-from-git-path path)
   )
 ;; (file-from-git-path "a/content/renderer/render_frame_impl.cc")
+;; (file-from-git-path "content/renderer/render_frame_impl.cc") -> nil
 
 (defun remove-if-slash (path)
   (if (directory-name-p path) (directory-file-name path) path)
@@ -126,6 +128,8 @@
 ;; (eq nil nil)
 ;; (eq (file-name-directory "../") nil)
 ;; (file-name-directory "..")
+
+;; All parents are .. or .
 (defun all-parents-p (path)
   (if (eq path nil) t
     (let ((newpath (remove-if-slash path)))
@@ -161,7 +165,7 @@
 
 (defun extract-path-from-local-path (path)
   (cond ((or (not path) (all-parents-p path )) "")
-        ((not (file-name-directory path)) (concat ""))
+        ((not (file-name-directory path)) path)
         (t
          (concat (file-name-as-directory
                   (extract-path-from-local-path
@@ -169,6 +173,9 @@
                  (file-name-nondirectory path))
          )
         ))
+(file-name-directory "content/")
+;; (extract-path-from-local-path "content")
+;; (extract-path-from-local-path "content/")
 ;; (extract-path-from-local-path "content/renderer/render_frame_impl.cc")
 ;; (extract-path-from-local-path "../../content/renderer/render_frame_impl.cc")
 ;; (extract-path-from-local-path "./../../content/renderer/render_frame_impl.cc")
@@ -227,6 +234,7 @@
       )
     )
   )
+;; (file-from-anything "content/browser/renderer_host/back_forward_cache_can_store_document_result.h")
 ;; (file-from-anything "a/content/renderer/render_frame_impl.cc")
 ;; (file-from-anything "https://cs.chromium.org/chromium/src/tools/emacs/adsf?q=emacs&sq=package:chromium&dr")
 ;; (file-from-anything "../../content/renderer/render_frame_impl.cc")
